@@ -45,48 +45,48 @@ public:
     ~MS5611();
 
     /** @brief initialize MS5611 Chip.
-    *  @return.
+     *  @return.
     */
     bool init();
 
     /** @brief reset MS5611.
-    *  @return.
+     *  @return.
     */
     bool reset();
 
     /** @brief refresh the data.
-    *  @return.
+     *  @return.
     */
     void refresh();
 
     /** @brief  get calculated temperature value
-    *  @return temperature in degrees of Celsius
+     *  @return temperature in degrees of Celsius
     */	
     float getTemperature();	
 
     /** @brief  get calculated pressure value
-    *  @return pressure in millibars
+     *  @return pressure in millibars
     */
     float getPressure();
 
 private:
     /** @brief Calculate temperature and pressure
-    *  @return.
+     *  @return.
     */
     void calPressureTemperature();
 
     /** @brief get the calculation coefficient
-    *  @return.
+     *  @return.
     */
     void readCalCoef(void);
 	
     /** @brief get the Prom value (refer to datasheet)
-    *  @return prom value.
+     *  @return prom value.
     */
     uint16_t readProm(uint8_t cmd);
 	
     /** @brief get the Dx value (refer to datasheet)
-    *  @return Dx value.
+     *  @return Dx value.
     */
     uint32_t readDx(uint8_t cmd);
 
