@@ -244,14 +244,13 @@ int32_t Ublox::enableNAV_STATUS()
     return SPI::transfer(spi_device_name.c_str(), gps_nav_status, from_gps_data_nav, gps_nav_status_length, 200000);
 }
 
-int32_t Ublox::testConnection()
+int32_t Ublox::init()
 {
     int32_t status;
     int32_t count = 0;
     uint8_t to_gps_data = 0x00, from_gps_data = 0x00;
 
     // we do this, so that at least one ubx message is enabled
-
     if (enableNAV_POSLLH()<0) {
         std::cerr << "Could not configure ublox over SPI\n";
     }

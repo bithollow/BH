@@ -90,7 +90,7 @@ public:
     Ublox(std::string name, UBXScanner* scan, UBXParser* pars);
     int32_t enableNAV_POSLLH();
     int32_t enableNAV_STATUS();
-    int32_t testConnection();
+    int32_t init();
     int32_t decodeMessages();
     int32_t decodeSingleMessage(message_t msg, std::vector<double>& position_data);
 }; // end of ublox class def
