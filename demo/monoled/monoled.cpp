@@ -1,6 +1,6 @@
 /*
 
-MONO LED is connected to 17(Red), 18(Green), 22(Blue) GPIO of raspberry pi3
+MONOLED is connected to 17(Red), 18(Green), 22(Blue) GPIO of raspberry pi3
 
 To run this example navigate to the directory containing it and run following commands:
 make
@@ -33,7 +33,7 @@ static struct option RGBOptions[] =
 };
 
 /**
- * @brief   initialize RGBLED
+ * @brief   initialize MONOLED
  * @return  true, if succeed, otherwise false.
 */
 bool initLED(Pin& pin)
@@ -50,26 +50,26 @@ bool initLED(Pin& pin)
 }
 
 /**
- * @brief  the usage of the rgbled application
+ * @brief  the usage of the monoled application
  */
 void usage(void)
 {
-    fprintf(stdout, "rgbled Application:\n");
+    fprintf(stdout, "monoled Application:\n");
     fprintf(stdout, "[Usage]: rgbleg [function]\n");
     fprintf(stdout,
         "    -h | --help      :Output this application`s usage\n"
         "    -v | --version   :Output this application`s version\n"
         "    -r | --red       :Lighten Red led\n"
         "    -g | --green     :Lighten Green led\n"
-	"    -b | --blue      :Lighten Blue led\n"
-	"    -l | --looprgb   :Loop lighten RGB led\n"
-	"\n"
+        "    -b | --blue      :Lighten Blue led\n"
+        "    -l | --looprgb   :Loop lighten RGB led\n"
+        "\n"
     );
     return;
 }
 
 /**
- * @brief  get version of the rgbled application
+ * @brief  get version of the monoled application
  */
 void getVersion(void)
 {
@@ -140,16 +140,16 @@ bool unlightenLeds(Pin& red, Pin& green, Pin& blue)
 }
 
 /**
- * @brief the usage of the rgbled application
+ * @brief the usage of the monoled application
  */
 bool loopRGB(Pin& red, Pin& green, Pin& blue)
 {
     unlightenLeds(red, green, blue);
     while (true) {
         lightenREDLed(red, green, blue);
-	sleep(1);
-	lightenGREENLed(red, green, blue);
-	sleep(1);
+    sleep(1);
+    lightenGREENLed(red, green, blue);
+    sleep(1);
         lightenBLUELed(red, green, blue);
         sleep(1);
     }
@@ -191,30 +191,29 @@ int main(int argc, char**argv)
             break;
         }
 
-        switch(opt)
-        {
+        switch(opt) {
         case 'h':
             usage(); 
             break;
         case 'v':
             getVersion();
-		break;
-	    case 'r':
-	      ret = lightenREDLed(red, green, blue);
-		break;
-	    case 'g':
-              ret = lightenGREENLed(red, green, blue);
-	        break;
-            case 'b':
-	      ret = lightenBLUELed(red, green, blue);
-		break;
-	    case 'l':
-	        ret = loopRGB(red, green, blue);
-                break;
-	    default:
-		break;
+            break;
+        case 'r':
+            ret = lightenREDLed(red, green, blue);
+            break;
+        case 'g':
+            ret = lightenGREENLed(red, green, blue);
+            break;
+        case 'b':
+            ret = lightenBLUELed(red, green, blue);
+            break;
+        case 'l':
+            ret = loopRGB(red, green, blue);
+            break;
+        default:
+            break;
         }
     }
 
-    return 0;		
+    return (ret ? 0 : 1);
 }

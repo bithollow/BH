@@ -67,9 +67,9 @@ void usage(void)
         "    -v | --version   :Output this application`s version\n"
         "    -r | --red       :Lighten Red led\n"
         "    -g | --green     :Lighten Green led\n"
-	"    -b | --blue      :Lighten Blue led\n"
-	"    -l | --looprgb   :Loop lighten RGB led\n"
-	"\n"
+        "    -b | --blue      :Lighten Blue led\n"
+        "    -l | --looprgb   :Loop lighten RGB led\n"
+        "\n"
     );
     return;
 }
@@ -135,7 +135,7 @@ bool lightenBlue(PCA9685& led)
 bool loopRGB(PCA9685& led)
 {
     uint16_t R = 2000, G = 0, B = 0;
-	while (true) {
+    while (true) {
         for (R = 0; R < 4095; R++)
             led.setPWM(RED_LED_CHANNEL, 0, R);
         for (B = 4095; B > 0; B--)
@@ -163,7 +163,7 @@ int main(int argc, char**argv)
 
     Pin pin(outputEnablePin);
     PCA9685 led;
-	
+
     if (!initRGBLED(pin, led)) {
         fprintf(stdout, "init failed!\n");
         return 0;
@@ -171,38 +171,36 @@ int main(int argc, char**argv)
 
     sleep(1);
     bool ret = true;
-    while (true)
-    {
+    while (true) {
         int opt = getopt_long(argc, argv, "hvrgbl", RGBOptions, NULL);
         if (-1 == opt) {
             fprintf(stdout, "Type './rgbled -h/--help' for usage\n");
             break;
         }
 
-        switch(opt)
-        {
+        switch(opt) {
         case 'h':
             usage(); 
             break;
         case 'v':
             getVersion();
-		break;
-	    case 'r':
-	        ret = lightenRed(led);
-		break;
-	    case 'g':
-	        ret = lightenGreen(led);
-	        break;
-            case 'b':
-	        ret = lightenBlue(led);
-		break;
-	    case 'l':
-	        ret = loopRGB(led);
-                break;
-	    default:
-		break;
+            break;
+        case 'r':
+            ret = lightenRed(led);
+            break;
+        case 'g':
+            ret = lightenGreen(led);
+            break;
+        case 'b':
+            ret = lightenBlue(led);
+            break;
+        case 'l':
+            ret = loopRGB(led);
+            break;
+        default:
+            break;
         }
     }
 
-    return 0;		
+    return (ret ? 0 : 1);
 }
