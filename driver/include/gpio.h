@@ -29,6 +29,10 @@ namespace BH {
 #define RPI_GPIO_21   21   // Pin 40    BH RC INPUT
 #define RPI_GPIO_26   26   // Pin 37    BH RC INPUT
 
+#define RPI_GPIO_17   17   // Pin ??    BH LED RED
+#define RPI_GPIO_18   18   // Pin ??    BH LED GREEN
+#define RPI_GPIO_22   22   // Pin ??    BH LED BLUE
+  
 class Pin {
 public:
     typedef enum {
